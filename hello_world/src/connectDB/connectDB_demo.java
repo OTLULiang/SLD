@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class connectDB_demo {
 		
-		private String host = "192.168.56.101:8810";
+		private String host = "192.168.56.102:8810";
 		private String userName = "pgtest";
 		private String password = "pgtest";
 		private String dbName = "postgres";
@@ -21,7 +21,9 @@ public class connectDB_demo {
 			Connection conn = null;
 		    
 		    try {
+		    	// 加载驱动
 		         Class.forName("org.postgresql.Driver");
+		         //创建连接。
 		         conn = DriverManager
 		            .getConnection("jdbc:postgresql://"+host+"/"+ this.dbName,
 		            	this.userName, this.password);       
@@ -39,11 +41,11 @@ public class connectDB_demo {
 		
 		private boolean initDB() 
 		{
-			String tab = "select count(1) from pg_tables where tablename = 'user_info'";
+			String tab = "select count(1) from pg_tables where tablename = 'user_info1';";
 			
-			String deltab = "drop table user_info;";
+			String deltab = "drop table user_info1;";
 			
-			String addtab = "create table user_info (" +
+			String addtab = "create table user_info1 (" +
 					     "username text,"
 					     + "phone_number int,"
 					     + "address char(50),"
@@ -79,7 +81,7 @@ public class connectDB_demo {
 		
 		public long inserData ()
 		{
-			String dataTemp = "insert into user_info values(";
+			String dataTemp = "insert into user_info1 values(";
 			
 			String data = null;
 			long count = 0;
@@ -89,7 +91,7 @@ public class connectDB_demo {
 				
 				Connection conn = createConnect();
 				Statement stmt = conn.createStatement();	
-				for (int i =0; i< 1000; i++)
+				for (int i =0; i< 10; i++)
 				{			
 					data = dataTemp + 
 					   "'user" + r.nextInt() + "'," +
@@ -136,7 +138,7 @@ public class connectDB_demo {
 			cdb.initDB();
 			cdb.inserData();
 			try {
-				st = cdb.queryData("select * from user_info;");
+				st = cdb.queryData("select * from user_info1;");
 				
 				st.next();
 				while(!st.isAfterLast())
@@ -151,6 +153,8 @@ public class connectDB_demo {
 				
 			} catch (SQLException e) {			
 				e.printStackTrace();
+				
+				
 			}
 		      
 		}

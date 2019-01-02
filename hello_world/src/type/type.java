@@ -12,10 +12,19 @@ public class type {
         //data_type();
 		
 		// if else for while
-		ifelse();
+		//ifelse();
+		 print();
 		
 	}
 	
+	private static void print()
+	{
+		String a = "ssss";
+		prt(a);
+		String b = a + " = "  +  1;
+		prt(b);
+		
+	}
 	private static void ifelse()
 	{
 		int i, sum;
@@ -100,10 +109,18 @@ public class type {
 		
 	}
 	
-	 private static void prt(String s)
-	 {
-		    System.out.println(s);
-	 }
+	  static void prt(String s) {
+	    System.out.println(s);
+	  }
+	  // shorthand to print a string and an int:
+	  static void pInt(String s, int i) {
+	    prt(s + " = " + i);
+	  }
+	  // shorthand to print a string and a float:
+	  static void pFlt(String s, float f) {
+	    prt(s + " = " + f);
+	  }
+
 
 	
 
